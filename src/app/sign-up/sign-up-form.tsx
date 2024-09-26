@@ -17,18 +17,19 @@ import {
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 
-import { signInSchema } from './sign-in-schema'
+import { signUpSchema } from './sign-up-schema'
 
-export function SignInForm() {
-  const form = useForm<z.infer<typeof signInSchema>>({
-    resolver: zodResolver(signInSchema),
+export function SignUpForm() {
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       email: '',
       password: '',
+      confirmPassword: '',
     },
   })
 
-  async function onSubmit(values: z.infer<typeof signInSchema>) {
+  async function onSubmit(values: z.infer<typeof signUpSchema>) {
     console.log(values)
   }
 
@@ -74,28 +75,39 @@ export function SignInForm() {
           )}
         />
 
-        <Link
-          className="ml-auto text-xs text-muted-foreground hover:underline"
-          href={'/reset-password'}
-        >
-          Esqueceu sua senha?
-        </Link>
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Senha:</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Confirme sua senha:"
+                  type="password"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button className="" type="submit">
-          Entrar
+          Criar
         </Button>
 
         <div className="flex items-center gap-4">
           <Separator className="w-full shrink" />
           <span className="min-w-max text-xs text-muted-foreground">
-            Não tem uma conta?
+            Já possui uma conta?
           </span>
           <Separator className="w-full shrink" />
         </div>
 
-        <Link href={'sign-up'}>
-          <Button className="w-full" type="button" variant="outline">
-            Criar conta
+        <Link href={'sign-in'}>
+          <Button className="w-full" type="submit" variant="outline">
+            Entrar
           </Button>
         </Link>
       </form>

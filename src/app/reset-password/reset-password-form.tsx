@@ -17,18 +17,17 @@ import {
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 
-import { signInSchema } from './sign-in-schema'
+import { resetPasswordSchema } from './reset-password-schema'
 
-export function SignInForm() {
-  const form = useForm<z.infer<typeof signInSchema>>({
-    resolver: zodResolver(signInSchema),
+export function ResetPasswordForm() {
+  const form = useForm<z.infer<typeof resetPasswordSchema>>({
+    resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
       email: '',
-      password: '',
     },
   })
 
-  async function onSubmit(values: z.infer<typeof signInSchema>) {
+  async function onSubmit(values: z.infer<typeof resetPasswordSchema>) {
     console.log(values)
   }
 
@@ -56,33 +55,8 @@ export function SignInForm() {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Senha:</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Informe sua senha:"
-                  type="password"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Link
-          className="ml-auto text-xs text-muted-foreground hover:underline"
-          href={'/reset-password'}
-        >
-          Esqueceu sua senha?
-        </Link>
-
         <Button className="" type="submit">
-          Entrar
+          Enviar
         </Button>
 
         <div className="flex items-center gap-4">

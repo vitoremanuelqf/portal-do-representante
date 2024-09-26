@@ -12,11 +12,11 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-interface SignInCardProps {
+interface ResetPasswordCardProps {
   children: React.ReactNode
 }
 
-export function SignInCard({ children }: SignInCardProps) {
+export function ResetPasswordCard({ children }: ResetPasswordCardProps) {
   return (
     <Card className="h-auto w-full max-w-96">
       <CardHeader className="flex h-auto w-full flex-col gap-4">
@@ -29,9 +29,9 @@ export function SignInCard({ children }: SignInCardProps) {
         </div>
 
         <div className="h-auto w-full">
-          <CardTitle>Acessar conta</CardTitle>
+          <CardTitle>Recuperar senha</CardTitle>
           <CardDescription>
-            Entre com suas credenciais para acessar sua conta.
+            Digite seu e-mail para redefinir sua senha.
           </CardDescription>
         </div>
       </CardHeader>

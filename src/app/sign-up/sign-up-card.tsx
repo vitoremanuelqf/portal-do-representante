@@ -16,7 +16,7 @@ interface SignInCardProps {
   children: React.ReactNode
 }
 
-export function SignInCard({ children }: SignInCardProps) {
+export function SignUpCard({ children }: SignInCardProps) {
   return (
     <Card className="h-auto w-full max-w-96">
       <CardHeader className="flex h-auto w-full flex-col gap-4">
@@ -29,10 +29,8 @@ export function SignInCard({ children }: SignInCardProps) {
         </div>
 
         <div className="h-auto w-full">
-          <CardTitle>Acessar conta</CardTitle>
-          <CardDescription>
-            Entre com suas credenciais para acessar sua conta.
-          </CardDescription>
+          <CardTitle>Criar conta</CardTitle>
+          <CardDescription>Inscreva-se para começar.</CardDescription>
         </div>
       </CardHeader>
 
