@@ -1,12 +1,10 @@
 import {
-  Bookmark,
-  BookmarkCheck,
-  BookmarkX,
   Globe,
   GlobeLock,
   Heart,
   Link,
   MessageSquare,
+  Star,
   Trash2,
 } from 'lucide-react'
 import * as React from 'react'
@@ -28,7 +26,7 @@ import { PostComment } from './post-comment'
 
 export function Post() {
   return (
-    <Card className="h-auto w-full max-w-screen-md">
+    <Card className="h-auto w-full max-w-2xl">
       <CardHeader className="flex h-auto w-full flex-row items-center justify-between gap-2 space-y-0">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -100,7 +98,7 @@ export function Post() {
           </Button>
 
           <Button className="ml-auto" variant="ghost" size="xs">
-            <Bookmark className="inline size-5 stroke-[1.25] text-muted-foreground" />
+            <Star className="inline size-5 stroke-[1.25] text-muted-foreground" />
           </Button>
         </div>
         <Separator className="w-full" />
