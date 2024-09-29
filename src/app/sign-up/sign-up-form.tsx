@@ -105,11 +105,9 @@ export function SignUpForm() {
           <Separator className="w-full shrink" />
         </div>
 
-        <Link href={'sign-in'}>
-          <Button className="w-full" type="submit" variant="outline">
-            Entrar
-          </Button>
-        </Link>
+        <Button className="w-full" type="submit" variant="outline" asChild>
+          <Link href={'sign-in'}>Entrar</Link>
+        </Button>
       </form>
     </Form>
   )

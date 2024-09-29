@@ -67,11 +67,9 @@ export function ResetPasswordForm() {
           <Separator className="w-full shrink" />
         </div>
 
-        <Link href={'sign-up'}>
-          <Button className="w-full" type="button" variant="outline">
-            Criar conta
-          </Button>
-        </Link>
+        <Button className="w-full" type="button" variant="outline" asChild>
+          <Link href={'sign-up'}>Criar conta</Link>
+        </Button>
       </form>
     </Form>
   )
