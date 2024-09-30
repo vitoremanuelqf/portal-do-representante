@@ -1,13 +1,16 @@
 import { Header } from '@/components/header'
-import { Post } from '@/components/post'
+import { Menus } from '@/components/menus'
+import { Posts } from '@/components/posts'
 
-export default function Posts() {
+export default function Home() {
   return (
     <div className="flex size-full min-h-dvh flex-col items-center">
       <Header />
 
-      <div className="flex h-auto w-full max-w-5xl items-center justify-between px-4 py-2">
-        <Post />
+      <div className="flex w-full max-w-5xl flex-1 gap-4 px-2 py-4">
+        <Menus />
+
+        <Posts />
       </div>
     </div>
   )

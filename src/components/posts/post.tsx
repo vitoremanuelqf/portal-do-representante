@@ -1,12 +1,4 @@
-import {
-  Globe,
-  GlobeLock,
-  Heart,
-  Link,
-  MessageSquare,
-  Star,
-  Trash2,
-} from 'lucide-react'
+import { Globe, Heart, Link, MessageSquare, Star, Trash2 } from 'lucide-react'
 import * as React from 'react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -26,7 +18,7 @@ import { PostComment } from './post-comment'
 
 export function Post() {
   return (
-    <Card className="h-auto w-full max-w-2xl">
+    <Card className="h-auto w-full">
       <CardHeader className="flex h-auto w-full flex-row items-center justify-between gap-2 space-y-0">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />

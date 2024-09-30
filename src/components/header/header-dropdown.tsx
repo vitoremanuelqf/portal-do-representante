@@ -1,6 +1,6 @@
 'use client'
 
-import { LogOut, Moon, Sun, SunMoon, User } from 'lucide-react'
+import { LogOut, Menu, Moon, Sun, SunMoon, User } from 'lucide-react'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 
@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Switch } from '@/components/ui/switch'
 
-export function Menu() {
+export function HeaderDropdown() {
   const { theme, setTheme } = useTheme()
 
   const preventCloseMenuOnClick = (
@@ -30,18 +30,12 @@ export function Menu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          className="size-min rounded-full border border-transparent bg-white p-0 hover:bg-white focus-visible:ring-transparent focus-visible:ring-offset-0"
-          variant={'secondary'}
-        >
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+        <Button variant="ghost">
+          <Menu className="size-5 text-muted-foreground" />
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="mr-4 mt-4 w-56">
+      <DropdownMenuContent className="m-4 w-56">
         <DropdownMenuLabel>
           Minha Conta:
           <span className="line-clamp-1 overflow-hidden text-xs font-normal text-muted-foreground">

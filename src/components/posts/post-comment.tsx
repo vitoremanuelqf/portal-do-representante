@@ -1,4 +1,4 @@
-import { Heart, Trash2 } from 'lucide-react'
+import { Heart, MessageSquareText, Trash2 } from 'lucide-react'
 import * as React from 'react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -13,9 +13,11 @@ import {
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
-export function PostCommentResponse() {
+import { PostCommentResponse } from './post-comment-response'
+
+export function PostComment() {
   return (
-    <Card className="h-auto w-full max-w-screen-md border-none shadow-none">
+    <Card className="h-auto w-full border-none shadow-none">
       <CardHeader className="flex h-auto w-full flex-row items-center justify-between gap-2 space-y-0 p-0 pb-2">
         <Avatar className="size-8">
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
@@ -49,8 +51,14 @@ export function PostCommentResponse() {
             <Heart className="mr-2 inline size-5 stroke-[1.25] text-muted-foreground" />
             Gostei
           </Button>
+
+          <Button variant="ghost" size="xs">
+            <MessageSquareText className="mr-2 inline size-5 stroke-[1.25] text-muted-foreground" />
+            Responder
+          </Button>
         </div>
         <Separator className="w-full" />
+        <PostCommentResponse />
       </CardFooter>
     </Card>
   )
