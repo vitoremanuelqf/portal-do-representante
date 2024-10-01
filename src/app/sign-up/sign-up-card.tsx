@@ -1,7 +1,5 @@
 'use client'
 
-import { useTheme } from 'next-themes'
-
 import Logo from '@/assets/Logo'
 import {
   Card,
@@ -17,12 +15,10 @@ interface SignInCardProps {
 }
 
 export function SignUpCard({ children }: SignInCardProps) {
-  const { theme } = useTheme()
-
   return (
     <Card className="h-auto w-full max-w-96">
       <CardHeader className="flex h-auto w-full flex-col gap-4">
-        <Logo theme={theme as 'dark' | 'light'} />
+        <Logo />
 
         <div className="h-auto w-full">
           <CardTitle>Criar conta</CardTitle>
