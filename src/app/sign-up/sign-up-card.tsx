@@ -1,8 +1,8 @@
 'use client'
 
-import Image from 'next/image'
+import { useTheme } from 'next-themes'
 
-import logoLight from '@/assets/logo-light.svg'
+import Logo from '@/assets/Logo'
 import {
   Card,
   CardContent,
@@ -17,16 +17,12 @@ interface SignInCardProps {
 }
 
 export function SignUpCard({ children }: SignInCardProps) {
+  const { theme } = useTheme()
+
   return (
     <Card className="h-auto w-full max-w-96">
       <CardHeader className="flex h-auto w-full flex-col gap-4">
-        <div className="h-auto w-full">
-          <Image
-            src={logoLight}
-            className="h-16 w-auto"
-            alt="Logo Portal do Colaborador"
-          />
-        </div>
+        <Logo theme={theme as 'dark' | 'light'} />
 
         <div className="h-auto w-full">
           <CardTitle>Criar conta</CardTitle>

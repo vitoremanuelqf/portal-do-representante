@@ -1,6 +1,6 @@
 'use client'
 
-import { LogOut, Menu, Moon, Sun, SunMoon, User } from 'lucide-react'
+import { LogOut, Moon, Sun, SunMoon, User } from 'lucide-react'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 
@@ -30,8 +30,14 @@ export function HeaderDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost">
-          <Menu className="size-5 text-muted-foreground" />
+        <Button
+          className="size-min rounded-full border border-transparent bg-white p-0 hover:bg-white focus-visible:ring-transparent focus-visible:ring-offset-0"
+          variant={'secondary'}
+        >
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
         </Button>
       </DropdownMenuTrigger>
 

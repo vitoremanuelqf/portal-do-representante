@@ -18,7 +18,7 @@ import { PostCommentResponse } from './post-comment-response'
 export function PostComment() {
   return (
     <Card className="h-auto w-full border-none shadow-none">
-      <CardHeader className="flex h-auto w-full flex-row items-center justify-between gap-2 space-y-0 p-0 pb-2">
+      <CardHeader className="h-auto w-full flex-row items-center justify-between gap-2 space-y-0 p-0 pb-2">
         <Avatar className="size-8">
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
           <AvatarFallback>CN</AvatarFallback>
@@ -29,9 +29,7 @@ export function PostComment() {
             Vítor Emanuel Queiroz Ferreira
           </CardTitle>
 
-          <CardDescription className="text-xs text-muted-foreground">
-            Aluno · 1h
-          </CardDescription>
+          <CardDescription>Aluno · 1h</CardDescription>
         </div>
 
         <Button variant="ghost" size="xs">
@@ -45,7 +43,7 @@ export function PostComment() {
         </p>
       </CardContent>
 
-      <CardFooter className="flex h-auto w-full flex-col items-start gap-4 p-0 pb-2 pl-10">
+      <CardFooter className="h-auto w-full flex-col items-start gap-4 p-0 pb-2 pl-10">
         <div className="flex h-auto w-full gap-4">
           <Button variant="ghost" size="xs">
             <Heart className="mr-2 inline size-5 stroke-[1.25] text-muted-foreground" />
