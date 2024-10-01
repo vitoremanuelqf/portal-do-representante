@@ -1,10 +1,4 @@
-interface IconProps {
-  theme: 'dark' | 'light'
-}
-
-export function Logo({ theme }: IconProps) {
-  const color = theme === 'light' ? '#111827' : '#F2F2F2'
-
+export function Logo() {
   return (
     <svg
       style={{
