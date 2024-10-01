@@ -7,12 +7,17 @@ export function Logo({ theme }: IconProps) {
 
   return (
     <svg
+      style={{
+        width: 'auto',
+        height: '100%',
+        maxHeight: '2.5rem',
+        objectFit: 'contain',
+      }}
       xmlns="http://www.w3.org/2000/svg"
       width="780"
       height="140"
       fill="none"
       viewBox="0 0 780 140"
-      className="h-full max-h-10 w-auto object-contain"
     >
       <rect width="32" height="32" x="36" y="108" fill="#16A34A" rx="4"></rect>
       <rect width="32" height="32" y="108" fill="#16A34A" rx="4"></rect>
