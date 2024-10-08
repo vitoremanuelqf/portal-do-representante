@@ -16,10 +16,13 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
+import SignUpService from '@/services/auth/SignUpService'
 
 import { signUpSchema } from './sign-up-schema'
 
 export function SignUpForm() {
+  const signUpService = new SignUpService()
+
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -30,7 +33,8 @@ export function SignUpForm() {
   })
 
   async function onSubmit(values: z.infer<typeof signUpSchema>) {
-    console.log(values)
+    const response = await signUpService.signUp(values)
+    console.log('🚀 ~ onSubmit ~ response:', response)
   }
 
   return (
