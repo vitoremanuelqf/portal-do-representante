@@ -68,7 +68,7 @@ export function ResetPasswordForm() {
         </div>
 
         <Button className="w-full" type="button" variant="outline" asChild>
-          <Link href={'sign-up'}>Criar conta</Link>
+          <Link href={'/auth/sign-up'}>Criar conta</Link>
         </Button>
       </form>
     </Form>

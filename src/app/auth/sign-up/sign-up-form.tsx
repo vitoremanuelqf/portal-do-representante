@@ -1,7 +1,9 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -16,10 +18,15 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
+import SignUpService, { TSignUpResponse } from '@/services/auth/SignUpService'
 
+import { tokenCreatedWithSignUp } from '../actions'
 import { signUpSchema } from './sign-up-schema'
 
 export function SignUpForm() {
+  const signUpService = new SignUpService()
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -30,7 +37,18 @@ export function SignUpForm() {
   })
 
   async function onSubmit(values: z.infer<typeof signUpSchema>) {
-    console.log(values)
+    setLoading(true)
+
+    await signUpService
+      .signUp(values)
+      .then(async (res) => {
+        const { token, uid, emailVerified } = res as TSignUpResponse
+
+        await tokenCreatedWithSignUp({ token, uid, emailVerified })
+      })
+      .catch(() => {
+        setLoading(false)
+      })
   }
 
   return (
@@ -93,8 +111,8 @@ export function SignUpForm() {
           )}
         />
 
-        <Button className="" type="submit">
-          Criar
+        <Button className="" type="submit" disabled={loading}>
+          {loading ? <Loader2 className="size-4 animate-spin" /> : 'Criar'}
         </Button>
 
         <div className="flex items-center gap-4">
@@ -106,7 +124,7 @@ export function SignUpForm() {
         </div>
 
         <Button className="w-full" type="submit" variant="outline" asChild>
-          <Link href={'sign-in'}>Entrar</Link>
+          <Link href={'/auth/sign-in'}>Entrar</Link>
         </Button>
       </form>
     </Form>

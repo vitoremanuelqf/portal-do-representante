@@ -1,7 +1,9 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -16,10 +18,15 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
+import SignInService, { TSignInResponse } from '@/services/auth/SignInService'
 
+import { tokenCreatedWithSignIn } from '../actions'
 import { signInSchema } from './sign-in-schema'
 
 export function SignInForm() {
+  const signInService = new SignInService()
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -29,7 +36,18 @@ export function SignInForm() {
   })
 
   async function onSubmit(values: z.infer<typeof signInSchema>) {
-    console.log(values)
+    setLoading(true)
+
+    await signInService
+      .signIn(values)
+      .then(async (res) => {
+        const { token, uid } = res as TSignInResponse
+
+        await tokenCreatedWithSignIn({ token, uid })
+      })
+      .catch(() => {
+        setLoading(false)
+      })
   }
 
   return (
@@ -76,13 +94,13 @@ export function SignInForm() {
 
         <Link
           className="ml-auto text-xs text-muted-foreground hover:underline"
-          href={'/reset-password'}
+          href={'/auth/reset-password'}
         >
           Esqueceu sua senha?
         </Link>
 
-        <Button className="" type="submit">
-          Entrar
+        <Button className="" type="submit" disabled={loading}>
+          {loading ? <Loader2 className="size-4 animate-spin" /> : 'Entrar'}
         </Button>
 
         <div className="flex items-center gap-4">

@@ -1,8 +1,11 @@
+import { isPrivate } from '@/auth/isPrivate'
 import { Header } from '@/components/header'
 import { Menus } from '@/components/menus'
 import { Posts } from '@/components/posts'
 
-export default function Home() {
+export default async function Home() {
+  await isPrivate()
+
   return (
     <div className="flex size-full min-h-dvh flex-col items-center">
       <Header />
