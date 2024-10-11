@@ -2,7 +2,6 @@ import {
   AuthError,
   createUserWithEmailAndPassword,
   getAuth,
-  sendEmailVerification,
   UserCredential,
 } from 'firebase/auth'
 
