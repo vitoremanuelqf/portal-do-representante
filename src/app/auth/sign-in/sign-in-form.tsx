@@ -20,7 +20,7 @@ import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import SignInService, { TSignInResponse } from '@/services/auth/SignInService'
 
-import { tokenCreatedWithSignIn } from '../actions'
+import { tokenCreatedWithAuth } from '../actions'
 import { signInSchema } from './sign-in-schema'
 
 export function SignInForm() {
@@ -41,9 +41,9 @@ export function SignInForm() {
     await signInService
       .signIn(values)
       .then(async (res) => {
-        const { token, uid } = res as TSignInResponse
+        const { token, uid, emailVerified } = res as TSignInResponse
 
-        await tokenCreatedWithSignIn({ token, uid })
+        await tokenCreatedWithAuth({ token, uid, emailVerified })
       })
       .catch(() => {
         setLoading(false)

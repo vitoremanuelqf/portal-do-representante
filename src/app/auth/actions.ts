@@ -3,39 +3,17 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-type TTokenCreatedWithSignIn = {
-  token: string
-  uid: string
-}
-
-type TTokenCreatedWithSignUp = {
+type TTokenCreatedWithAuth = {
   token: string
   uid: string
   emailVerified: boolean
 }
 
-export async function tokenCreatedWithSignIn({
-  token,
-  uid,
-}: TTokenCreatedWithSignIn) {
-  cookies().set('@portal-do-representante:token', token, {
-    path: '/',
-    maxAge: 60 * 60 * 24 * 7,
-  })
-
-  cookies().set('@portal-do-representante:uid', uid, {
-    path: '/',
-    maxAge: 60 * 60 * 24 * 7,
-  })
-
-  redirect('/')
-}
-
-export async function tokenCreatedWithSignUp({
+export async function tokenCreatedWithAuth({
   token,
   uid,
   emailVerified,
-}: TTokenCreatedWithSignUp) {
+}: TTokenCreatedWithAuth) {
   cookies().set('@portal-do-representante:token', token, {
     path: '/',
     maxAge: 60 * 60 * 24 * 7,
@@ -49,4 +27,11 @@ export async function tokenCreatedWithSignUp({
   if (emailVerified) redirect('/')
 
   redirect('/')
+}
+
+export async function tokenDeletedWithSignOut() {
+  cookies().delete('@portal-do-representante:token')
+  cookies().delete('@portal-do-representante:uid')
+
+  redirect('/auth/sign-in')
 }
