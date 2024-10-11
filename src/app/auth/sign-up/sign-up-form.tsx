@@ -1,7 +1,9 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -16,24 +18,37 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
-import SignInService from '@/services/auth/SignInService'
+import SignUpService, { TSignUpResponse } from '@/services/auth/SignUpService'
 
-import { signInSchema } from './sign-in-schema'
+import { tokenCreatedWithSignUp } from '../actions'
+import { signUpSchema } from './sign-up-schema'
 
-export function SignInForm() {
-  const signInService = new SignInService()
+export function SignUpForm() {
+  const signUpService = new SignUpService()
+  const [loading, setLoading] = useState(false)
 
-  const form = useForm<z.infer<typeof signInSchema>>({
-    resolver: zodResolver(signInSchema),
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       email: '',
       password: '',
+      confirmPassword: '',
     },
   })
 
-  async function onSubmit(values: z.infer<typeof signInSchema>) {
-    const response = await signInService.signIn(values)
-    console.log('🚀 ~ onSubmit ~ response:', response)
+  async function onSubmit(values: z.infer<typeof signUpSchema>) {
+    setLoading(true)
+
+    await signUpService
+      .signUp(values)
+      .then(async (res) => {
+        const { token, uid, emailVerified } = res as TSignUpResponse
+
+        await tokenCreatedWithSignUp({ token, uid, emailVerified })
+      })
+      .catch(() => {
+        setLoading(false)
+      })
   }
 
   return (
@@ -78,27 +93,38 @@ export function SignInForm() {
           )}
         />
 
-        <Link
-          className="ml-auto text-xs text-muted-foreground hover:underline"
-          href={'/reset-password'}
-        >
-          Esqueceu sua senha?
-        </Link>
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Senha:</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Confirme sua senha:"
+                  type="password"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-        <Button className="" type="submit">
-          Entrar
+        <Button className="" type="submit" disabled={loading}>
+          {loading ? <Loader2 className="size-4 animate-spin" /> : 'Criar'}
         </Button>
 
         <div className="flex items-center gap-4">
           <Separator className="w-full shrink" />
           <span className="min-w-max text-xs text-muted-foreground">
-            Não tem uma conta?
+            Já possui uma conta?
           </span>
           <Separator className="w-full shrink" />
         </div>
 
-        <Button className="w-full" type="button" variant="outline" asChild>
-          <Link href={'sign-up'}>Criar conta</Link>
+        <Button className="w-full" type="submit" variant="outline" asChild>
+          <Link href={'/auth/sign-in'}>Entrar</Link>
         </Button>
       </form>
     </Form>

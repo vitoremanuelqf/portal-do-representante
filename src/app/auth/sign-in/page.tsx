@@ -7,7 +7,7 @@ export default async function SignIn() {
   await isGuest()
 
   return (
-    <div className="flex size-full min-h-dvh items-center justify-center">
+    <div className="flex size-full min-h-dvh items-center justify-center p-4">
       <SignInCard>
         <SignInForm />
       </SignInCard>

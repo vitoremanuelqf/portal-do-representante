@@ -1,4 +1,5 @@
 import {
+  AuthError,
   getAuth,
   signInWithEmailAndPassword,
   UserCredential,
@@ -11,10 +12,10 @@ type TSignInProps = {
   password: string
 }
 
-type TSignInResponse = {
-  token: string | null
-  uid: string | null
-  emailVerified: boolean | null
+export type TSignInResponse = {
+  token: string
+  uid: string
+  emailVerified: boolean
 }
 
 class SignInService {
@@ -27,7 +28,7 @@ class SignInService {
   public async signIn({
     email,
     password,
-  }: TSignInProps): Promise<TSignInResponse> {
+  }: TSignInProps): Promise<TSignInResponse | AuthError> {
     try {
       const res: UserCredential = await signInWithEmailAndPassword(
         this.auth,
@@ -39,10 +40,9 @@ class SignInService {
 
       return { token, uid, emailVerified }
     } catch (err) {
-      console.error('🚀 ~ signIn ~ err:', err)
-      throw new Error(
-        'Não foi possível realizar o login. Por favor, verifique suas credenciais e tente novamente.',
-      )
+      const error = err as AuthError
+
+      return error
     }
   }
 }

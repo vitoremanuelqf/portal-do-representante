@@ -1,4 +1,5 @@
 import {
+  AuthError,
   createUserWithEmailAndPassword,
   getAuth,
   UserCredential,
@@ -11,10 +12,10 @@ type TSignUpProps = {
   password: string
 }
 
-type TSignUpResponse = {
-  token: string | null
-  uid: string | null
-  emailVerified: boolean | null
+export type TSignUpResponse = {
+  token: string
+  uid: string
+  emailVerified: boolean
 }
 
 class SignUpService {
@@ -27,7 +28,7 @@ class SignUpService {
   public async signUp({
     email,
     password,
-  }: TSignUpProps): Promise<TSignUpResponse> {
+  }: TSignUpProps): Promise<TSignUpResponse | AuthError> {
     try {
       const res: UserCredential = await createUserWithEmailAndPassword(
         this.auth,
@@ -39,10 +40,9 @@ class SignUpService {
 
       return { token, uid, emailVerified }
     } catch (err) {
-      console.error('🚀 ~ signUp ~ err:', err)
-      throw new Error(
-        'Não foi possível criar a conta. Por favor, verifique as informações fornecidas e tente novamente.',
-      )
+      const error = err as AuthError
+
+      return error
     }
   }
 }
