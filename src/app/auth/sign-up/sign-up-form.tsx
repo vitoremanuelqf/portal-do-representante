@@ -20,7 +20,7 @@ import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import SignUpService, { TSignUpResponse } from '@/services/auth/SignUpService'
 
-import { tokenCreatedWithSignUp } from '../actions'
+import { tokenCreatedWithAuth } from '../actions'
 import { signUpSchema } from './sign-up-schema'
 
 export function SignUpForm() {
@@ -44,7 +44,7 @@ export function SignUpForm() {
       .then(async (res) => {
         const { token, uid, emailVerified } = res as TSignUpResponse
 
-        await tokenCreatedWithSignUp({ token, uid, emailVerified })
+        await tokenCreatedWithAuth({ token, uid, emailVerified })
       })
       .catch(() => {
         setLoading(false)

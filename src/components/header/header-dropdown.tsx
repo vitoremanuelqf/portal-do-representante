@@ -4,6 +4,7 @@ import { LogOut, Moon, Sun, SunMoon, User } from 'lucide-react'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 
+import { tokenDeletedWithSignOut } from '@/app/auth/actions'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -84,7 +85,7 @@ export function HeaderDropdown() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={async () => await tokenDeletedWithSignOut()}>
           <LogOut className="mr-2 size-4 text-muted-foreground" />
           <span className="font-light text-muted-foreground">Sair</span>
         </DropdownMenuItem>
