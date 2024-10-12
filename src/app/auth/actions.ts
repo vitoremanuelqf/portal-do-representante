@@ -4,15 +4,15 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 type TTokenCreatedWithAuth = {
-  token: string
+  action: 'sign-in' | 'sign-up'
   uid: string
-  emailVerified: boolean
+  token: string
 }
 
 export async function tokenCreatedWithAuth({
-  token,
+  action,
   uid,
-  emailVerified,
+  token,
 }: TTokenCreatedWithAuth) {
   cookies().set('@portal-do-representante:token', token, {
     path: '/',
@@ -24,7 +24,7 @@ export async function tokenCreatedWithAuth({
     maxAge: 60 * 60 * 24 * 7,
   })
 
-  if (emailVerified) redirect('/')
+  if (action === 'sign-up') redirect('/account/profile')
 
   redirect('/')
 }

@@ -3,7 +3,7 @@
 import { Post } from './post'
 
 export function Posts() {
-  const array = [1, 2, 3]
+  const array = [1]
 
   return (
     <main className="flex h-auto w-full flex-col gap-4 overflow-auto">

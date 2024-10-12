@@ -44,7 +44,13 @@ export function SignUpForm() {
       .then(async (res) => {
         const { token, uid, emailVerified } = res as TSignUpResponse
 
-        await tokenCreatedWithAuth({ token, uid, emailVerified })
+        console.log('Pedir para verificar o email!', emailVerified)
+
+        await tokenCreatedWithAuth({
+          action: 'sign-up',
+          uid,
+          token,
+        })
       })
       .catch(() => {
         setLoading(false)
