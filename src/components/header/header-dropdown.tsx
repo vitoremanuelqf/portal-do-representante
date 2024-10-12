@@ -54,7 +54,7 @@ export function HeaderDropdown() {
 
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href={'/profile'}>
+            <Link href={'/account/profile'}>
               <User className="mr-2 size-4 text-muted-foreground" />
               <span className="font-light text-muted-foreground">Perfil</span>
             </Link>

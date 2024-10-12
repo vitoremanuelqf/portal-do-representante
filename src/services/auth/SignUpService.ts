@@ -41,6 +41,7 @@ class SignUpService {
       return { token, uid, emailVerified }
     } catch (err) {
       const error = err as AuthError
+      console.log('🚀 ~ SignUpService ~ error:', error)
 
       return error
     }

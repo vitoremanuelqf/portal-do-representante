@@ -1,7 +1,10 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -16,10 +19,15 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
+import ResetPasswordService from '@/services/auth/ResetPasswordService'
 
 import { resetPasswordSchema } from './reset-password-schema'
 
 export function ResetPasswordForm() {
+  const resetPasswordService = new ResetPasswordService()
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<z.infer<typeof resetPasswordSchema>>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
@@ -28,7 +36,17 @@ export function ResetPasswordForm() {
   })
 
   async function onSubmit(values: z.infer<typeof resetPasswordSchema>) {
-    console.log(values)
+    setLoading(true)
+
+    await resetPasswordService
+      .resetPassword(values)
+      .then(() => {
+        router.push('/auth/sign-in')
+      })
+      .catch((err) => {
+        console.log('🚀 ~ onSubmit ~ err:', err)
+        setLoading(false)
+      })
   }
 
   return (
@@ -55,8 +73,8 @@ export function ResetPasswordForm() {
           )}
         />
 
-        <Button className="" type="submit">
-          Enviar
+        <Button className="" type="submit" disabled={loading}>
+          {loading ? <Loader2 className="size-4 animate-spin" /> : 'Enviar'}
         </Button>
 
         <div className="flex items-center gap-4">
