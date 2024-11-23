@@ -14,8 +14,6 @@ import {
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
-import { PostComment } from './post-comment'
-
 export function Post() {
   return (
     <Card className="h-auto w-full">
@@ -31,7 +29,7 @@ export function Post() {
           </CardTitle>
 
           <CardDescription>
-            Professor · 1h · <Globe className="inline size-4 stroke-[1.25]" />
+            Aluno · 1h · <Globe className="inline size-4 stroke-[1.25]" />
           </CardDescription>
         </div>
 
@@ -93,11 +91,11 @@ export function Post() {
             <Star className="inline size-5 stroke-[1.25] text-muted-foreground" />
           </Button>
         </div>
-        <Separator className="w-full" />
+        {/* <Separator className="w-full" />
         <CardTitle className="text-base">Comentários:</CardTitle>
         <PostComment />
         <Separator className="w-full" />
-        <PostComment />
+        <PostComment /> */}
       </CardFooter>
     </Card>
   )
