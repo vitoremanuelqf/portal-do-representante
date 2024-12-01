@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '../ui/button'
+import { DialogCreatePost } from './dialog-create-post'
 import { Post } from './post'
 
 export function Posts() {
@@ -8,7 +8,7 @@ export function Posts() {
 
   return (
     <main className="flex h-auto w-full flex-col gap-4 overflow-auto">
-      <Button>Adicionar publicação</Button>
+      <DialogCreatePost />
 
       {array.map((i) => (
         <Post key={i} />

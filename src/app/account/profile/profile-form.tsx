@@ -23,33 +23,38 @@ import { useUser } from '@/hooks/useUser'
 import { profileSchema } from './profile-schema'
 
 export default function ProfileForm() {
-  const { loading, user } = useUser()
+  const { loading, user, handleUpdatePassword, handleUpdateProfile } = useUser()
 
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
+      bio: '',
+      confirmPassword: '',
       displayName: '',
       email: '',
       password: '',
-      confirmPassword: '',
+      photoURL: '',
     },
   })
 
-  async function onSubmit(values: z.infer<typeof profileSchema>) {
-    console.log('🚀 ~ onSubmit ~ values:', values)
-    // if (userData?.displayName !== values.displayName) {
-    //   await updateUser({ displayName: values.displayName })
-    // }
+  console.log(form.formState.errors)
 
-    // if (values?.password) {
-    //   await updatePassword({ password: values.password })
-    // }
+  async function onSubmit(values: z.infer<typeof profileSchema>) {
+    await handleUpdateProfile({
+      displayName: values.displayName,
+      photoURL: values.photoURL,
+    })
+
+    if (values?.password) {
+      await handleUpdatePassword({ password: values.password })
+    }
   }
 
   useEffect(() => {
     form.setValue('displayName', user?.displayName ? user.displayName : '')
+    form.setValue('photoURL', user?.photoURL ? user.photoURL : '')
     form.setValue('email', user?.email ? user.email : '')
-  }, [form, user?.displayName, user?.email])
+  }, [form, user?.displayName, user?.email, user?.photoURL])
 
   return (
     <Form {...form}>
@@ -107,7 +112,27 @@ export default function ProfileForm() {
           <div className="flex h-auto w-full flex-col gap-4 md:flex-row">
             <FormField
               control={form.control}
-              name="confirmPassword"
+              name="photoURL"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Foto personalizada:</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Link da foto..."
+                      type="text"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="flex h-auto w-full flex-col gap-4 md:flex-row">
+            <FormField
+              control={form.control}
+              name="bio"
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>BIO:</FormLabel>
