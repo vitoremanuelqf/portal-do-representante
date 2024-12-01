@@ -11,7 +11,7 @@ export function HeaderNav() {
             href={'/'}
           >
             <Globe className="mr-1 size-5 stroke-[1.25] text-primary" />
-            Página Inicial
+            Publicações
           </Link>
         </li>
       </ul>
