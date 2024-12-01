@@ -37,8 +37,6 @@ export default function ProfileForm() {
     },
   })
 
-  console.log(form.formState.errors)
-
   async function onSubmit(values: z.infer<typeof profileSchema>) {
     await handleUpdateProfile({
       displayName: values.displayName,

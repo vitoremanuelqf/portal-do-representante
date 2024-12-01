@@ -60,6 +60,7 @@ export function UserContextProvider({ children }: IUserContextProviderProps) {
     })
       .then(() => {
         setUser((prev) => ({ ...prev, displayName, photoURL }) as IUser)
+        alert('Perfil atualizado com sucesso.')
       })
       .catch((err) => {
         console.error('🚀 ~ updateUser ~ err:', err)
@@ -93,7 +94,7 @@ export function UserContextProvider({ children }: IUserContextProviderProps) {
     const unsubscriber = onAuthStateChanged(auth, async (user) => {
       try {
         if (user && user.email && user.uid) {
-          console.log('🚀 ~ unsubscriber ~ user:', user)
+          if (!user?.displayName) router.push('/account/profile')
 
           setUser({
             displayName: user?.displayName,

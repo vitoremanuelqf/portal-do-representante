@@ -16,7 +16,7 @@ export function DialogCreatePost() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Adicionar publicação</Button>
+        <Button>Criar publicação</Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-lg">

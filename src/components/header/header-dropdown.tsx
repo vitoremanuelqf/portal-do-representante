@@ -51,7 +51,7 @@ export function HeaderDropdown() {
         <DropdownMenuLabel>
           Minha Conta:
           <span className="line-clamp-1 overflow-hidden text-xs font-normal text-muted-foreground">
-            Vítor Emanuel Queiroz Ferreira
+            {user?.displayName}
           </span>
         </DropdownMenuLabel>
 
