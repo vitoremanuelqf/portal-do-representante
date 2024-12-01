@@ -4,6 +4,8 @@ export const profileSchema = z
   .object({
     displayName: z.string().min(1, 'O nome é obrigatório.'),
     email: z.string().optional(),
+    photoURL: z.string().optional(),
+    bio: z.string().optional(),
     password: z
       .string()
       .optional()

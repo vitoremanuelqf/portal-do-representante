@@ -17,9 +17,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Switch } from '@/components/ui/switch'
+import { useUser } from '@/hooks/useUser'
+import { getInitials } from '@/utils/getInitials'
 
 export function HeaderDropdown() {
   const { theme, setTheme } = useTheme()
+  const { user } = useUser()
 
   const preventCloseMenuOnClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -36,8 +39,10 @@ export function HeaderDropdown() {
           variant={'secondary'}
         >
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarImage alt="Foto" src={user?.photoURL || ''} />
+            <AvatarFallback>
+              {getInitials(user?.displayName || '')}
+            </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -46,7 +51,7 @@ export function HeaderDropdown() {
         <DropdownMenuLabel>
           Minha Conta:
           <span className="line-clamp-1 overflow-hidden text-xs font-normal text-muted-foreground">
-            Vítor Emanuel Queiroz Ferreira
+            {user?.displayName}
           </span>
         </DropdownMenuLabel>
 
