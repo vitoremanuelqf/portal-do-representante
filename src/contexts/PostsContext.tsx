@@ -22,6 +22,8 @@ export function PostsContextProvider({ children }: IPostsContextProviderProps) {
   const [posts, setPosts] = useState<any[]>([])
 
   async function getPosts() {
+    setLoading((prev) => ({ ...prev, element: true }))
+
     await getPostsService()
       .then((res) => {
         setPosts(res)
