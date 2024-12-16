@@ -1,7 +1,16 @@
-import { Globe, Heart, Link, MessageSquare, Star, Trash2 } from 'lucide-react'
+import {
+  Eye,
+  Globe,
+  Heart,
+  Link,
+  MessageSquare,
+  Star,
+  Trash2,
+} from 'lucide-react'
+import NextLink from 'next/link'
 import * as React from 'react'
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -14,13 +23,16 @@ import {
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
-export function Post() {
+interface PostProps {
+  children?: React.ReactNode
+}
+
+export function Post({ children }: PostProps) {
   return (
     <Card className="h-auto w-full">
       <CardHeader className="h-auto w-full flex-row items-center justify-between gap-2 space-y-0">
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>VE</AvatarFallback>
         </Avatar>
 
         <div className="flex flex-1 flex-col">
@@ -35,6 +47,12 @@ export function Post() {
 
         <Button variant="ghost">
           <Trash2 className="inline size-5 stroke-[1.25] text-muted-foreground" />
+        </Button>
+
+        <Button variant="ghost" asChild>
+          <NextLink href="/dawughdahd">
+            <Eye className="inline size-5 stroke-[1.25] text-muted-foreground" />
+          </NextLink>
         </Button>
       </CardHeader>
 
@@ -91,11 +109,8 @@ export function Post() {
             <Star className="inline size-5 stroke-[1.25] text-muted-foreground" />
           </Button>
         </div>
-        {/* <Separator className="w-full" />
-        <CardTitle className="text-base">Comentários:</CardTitle>
-        <PostComment />
-        <Separator className="w-full" />
-        <PostComment /> */}
+
+        {children}
       </CardFooter>
     </Card>
   )

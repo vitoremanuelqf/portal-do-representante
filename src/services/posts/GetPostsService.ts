@@ -3,15 +3,11 @@ import { collection, getDocs, getFirestore, query } from 'firebase/firestore'
 import { app } from '@/lib/firebase'
 
 class GetPostsService {
-  private db
-
-  constructor() {
-    this.db = getFirestore(app)
-  }
-
   public async getPostsService(): Promise<any> {
+    const db = getFirestore(app)
+
     try {
-      const postsRef = collection(this.db, `posts`)
+      const postsRef = collection(db, `posts`)
       const postsQuery = query(postsRef)
       const postsSnapshot = await getDocs(postsQuery)
 
